@@ -1,0 +1,16 @@
+services:
+  it.swift_mailer_logger:
+      class:  IT\SwiftMailerLoggerBundle\Logger\SwiftMailerLogger
+      arguments: ["@monolog.logger.mailer"]
+      tags:
+        - { name: monolog.logger, channel: mailer }
+
+  it.swift_mailer_db_logger:
+      class:  IT\SwiftMailerLoggerBundle\Logger\SwiftMailerDbLogger
+      arguments: ["@service_container"]
+
+  it.event_listener.swift_mailer:
+      class:  IT\SwiftMailerLoggerBundle\Logger\SwiftMailerEventListener
+      arguments: ["@service_container", "@it.swift_mailer_db_logger" ,"%it.swift_mailer_logger.enable_db_logger%"]
+      tags:
+        - { name: "swiftmailer.default.plugin" }
