@@ -1,6 +1,6 @@
 {
   "name": "it/swift-mailer-logger-bundle",
-  "description": "",
+  "description": "A simple Monolog and Database logger for SwiftMailer emails",
   "type": "symfony-bundle",
   "license": "MIT",
   "authors": [
