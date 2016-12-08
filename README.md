@@ -1,6 +1,6 @@
 # SwiftMailerLoggerBundle
 
-Symfony2 Bundle for logging all emails sent with the SwiftMailer. 
+Symfony2 Bundle for logging all emails sent with SwiftMailer. 
 
 ## Installation
 
@@ -39,7 +39,7 @@ it_swift_mailer_logger:
 
 ## Usage
 
-A log file will automatically be created et filled when you send emails.
+A log file will automatically be created and filled when emails are sent.
 Turn ON the database logger to log all emails sent into your database.
 
 **Warning :**
