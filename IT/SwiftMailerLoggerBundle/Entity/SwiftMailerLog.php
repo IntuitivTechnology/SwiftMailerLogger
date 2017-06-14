@@ -34,6 +34,13 @@ class SwiftMailerLog
     /**
      * @var string
      *
+     * @ORM\Column(name="`from`", type="text", nullable=false)
+     */
+    protected $from;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="`to`", type="text", nullable=false)
      */
     protected $to;
@@ -194,6 +201,23 @@ class SwiftMailerLog
     public function setSentAt($sentAt)
     {
         $this->sentAt = $sentAt;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getFrom()
+    {
+        return $this->from;
+    }
+
+    /**
+     * @param string $from
+     */
+    public function setFrom($from)
+    {
+        $this->from = $from;
         return $this;
     }
 

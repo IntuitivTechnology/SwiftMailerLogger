@@ -71,7 +71,7 @@ class SwiftMailerEventListener implements Swift_Events_SendListener
             $this->getLogger()->info(sprintf('Mail sent to: %s (CC: %s / BCC: %s) - %s - #%s', $recipients['to'], $recipients['cc'], $recipients['bcc'], $evt->getMessage()->getSubject(), $evt->getMessage()->getId()));
 
             if ($this->enableDbLogger) {
-                $this->dbLogger->log($recipients['to'], $recipients['cc'], $recipients['bcc'], $evt->getMessage()->getSubject(), $evt->getMessage()->getBody());
+                $this->dbLogger->log($recipients['from'], $recipients['to'], $recipients['cc'], $recipients['bcc'], $evt->getMessage()->getSubject(), $evt->getMessage()->getBody());
             }
 
             self::$mailsSent[] = $evt->getMessage()->getId();
@@ -88,6 +88,12 @@ class SwiftMailerEventListener implements Swift_Events_SendListener
      */
     protected function getMessageRecipients(Swift_Events_SendEvent $evt)
     {
+        
+        $from = $evt->getMessage()->getFrom();
+        if (is_array($from)) {
+            $from = implode('; ', array_keys($from));
+        }
+        
         $to = $evt->getMessage()->getTo();
         if (is_array($to)) {
             $to = implode('; ', array_keys($to));
@@ -104,6 +110,7 @@ class SwiftMailerEventListener implements Swift_Events_SendListener
         }
 
         return array(
+            'from' => $from,
             'to' => $to,
             'cc' => $cc,
             'bcc' => $bcc,

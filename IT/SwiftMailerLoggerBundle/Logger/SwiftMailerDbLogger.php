@@ -23,12 +23,13 @@ class SwiftMailerDbLogger
         $this->container = $container;
     }
 
-    public function log($to, $cc = null, $bcc = null, $subject = null, $message = null)
+    public function log($from, $to, $cc = null, $bcc = null, $subject = null, $message = null)
     {
 
         $log = new SwiftMailerLog();
 
         $log
+            ->setFrom($from)
             ->setTo($to)
             ->setCc($cc)
             ->setBcc($bcc)
